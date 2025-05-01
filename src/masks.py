@@ -1,8 +1,3 @@
-from typing import Any
-from typing import Optional
-from typing import Union
-
-
 def get_mask_card_number(number_card: str) -> str:
     """
     Функция get_mask_card_number принимает на вход номер
@@ -19,4 +14,3 @@ def get_mask_account(number_card: str) -> str:
     правилу **XXXX
     """
     return f"**{number_card[-4:]}"
-
