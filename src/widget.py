@@ -6,15 +6,6 @@ def mask_account_card(account_str: str) -> str:
     """
     Функция, которая умеет обрабатывать информацию о картах и счетах
     """
-    # for i in account_str:
-    #     # i = List(i.split())
-    #     print(i)
-    #     if i[0] == "Visa":
-    #         return f"Visa Platinum {get_mask_card_number(i[-1])}"
-    #     elif i[0] == "Maestro":
-    #         return f"Maestro {get_mask_card_number(i[-1])}"
-    #     elif i[0] == "Счет":
-    #         return f"Счет {get_mask_account(i[-1])}"
     account_str = account_str.split(maxsplit=-1)
     # print(account_str)
     if len(account_str[-1]) == 20:
