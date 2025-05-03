@@ -6,8 +6,7 @@ def mask_account_card(account_str: str) -> str:
     """
     Функция, которая умеет обрабатывать информацию о картах и счетах
     """
-    account_str = account_str.split(maxsplit=-1)
-    # print(account_str)
+    account_str = account_str.split()
     if len(account_str[-1]) == 20:
         return f"{account_str[0]} {get_mask_account(account_str[-1])}"
     elif len(account_str[-1]) < 20 and len(account_str) > 2:
