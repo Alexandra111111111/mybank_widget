@@ -21,32 +21,3 @@ def get_date(date: str) -> str:
     """
     date = date[:10].split("-")[::-1]
     return ".".join(date)
-
-a = "Visa Platinum 7000792289606361"
-b = "Maestro 7000792289606361"
-c = "Счет 73654108430135874305"
-
-vh_1 = "Maestro 1596837868705199"
-vh_2 = "Счет 64686473678894779589"
-vh_3 = "MasterCard 7158300734726758"
-vh_4 = "Счет 35383033474447895560"
-vh_5 = "Visa Classic 6831982476737658"
-vh_6 = "Visa Platinum 8990922113665229"
-vh_7 = "Visa Gold 5999414228426353"
-vh_8 = "Счет 73654108430135874305"
-
-my_date = "2024-03-11T02:26:18.671407"
-
-print(mask_account_card(a))
-print(mask_account_card(b))
-print(mask_account_card(c))
-print(mask_account_card(vh_1))
-print(mask_account_card(vh_2))
-print(mask_account_card(vh_3))
-print(mask_account_card(vh_4))
-print(mask_account_card(vh_5))
-print(mask_account_card(vh_6))
-print(mask_account_card(vh_7))
-print(mask_account_card(vh_8))
-
-print(get_date(my_date))
