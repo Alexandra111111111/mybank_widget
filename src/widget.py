@@ -2,11 +2,11 @@ from src.masks import get_mask_account
 from src.masks import get_mask_card_number
 
 
-def mask_account_card(account_str: str) -> str:
+def mask_account_card(account_part: str) -> str:
     """
     Функция, которая умеет обрабатывать информацию о картах и счетах
     """
-    account_str = account_str.split()
+    account_str = account_part.split()
     if len(account_str[-1]) == 20:
         return f"{account_str[0]} {get_mask_account(account_str[-1])}"
     elif len(account_str[-1]) < 20 and len(account_str) > 2:
@@ -19,5 +19,5 @@ def get_date(date: str) -> str:
     """
     Функция, которая возвращает строку с датой в формате "ДД.ММ.ГГГГ"
     """
-    date = date[:10].split("-")[::-1]
-    return ".".join(date)
+    date_str = date[:10].split("-")[::-1]
+    return ".".join(date_str)
