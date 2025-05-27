@@ -1,7 +1,8 @@
 import pytest
-from src.processing import transformat_int_str
+
 from src.processing import filter_by_state
 from src.processing import sort_by_date
+from src.processing import transformat_int_str
 
 
 @pytest.mark.parametrize(
