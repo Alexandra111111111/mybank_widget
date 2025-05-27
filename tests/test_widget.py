@@ -45,11 +45,11 @@ def test_get_date(value, expected):
 @pytest.mark.parametrize(
     "value, expected_exception",
     [
-        ("InvalidDateString", ValueError),           # Некорректная строка
+        ("InvalidDateString", ValueError),  # Некорректная строка
         ("2023-13-32T00:00:00.000000", ValueError),  # Неверный месяц и день
         ("2023-02-30T00:00:00.000000", ValueError),  # Невозможная дата
-        ("", ValueError),                             # Пустая строка
-    ]
+        ("", ValueError),  # Пустая строка
+    ],
 )
 def test_get_date_error_handling(value, expected_exception):
     with pytest.raises(expected_exception):
