@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from src.masks import get_mask_account
 from src.masks import get_mask_card_number
 
@@ -19,5 +21,11 @@ def get_date(date: str) -> str:
     """
     Функция, которая возвращает строку с датой в формате "ДД.ММ.ГГГГ"
     """
-    date_str = date[:10].split("-")[::-1]
-    return ".".join(date_str)
+    try:
+        # Пробуем проанализировать дату
+        parsed_date = datetime.strptime(date[:10], "%Y-%m-%d")
+        # Получаем дату в нужном формате
+        return parsed_date.strftime("%d.%m.%Y")
+    except ValueError:
+        # Если формат даты некорректен, выбрасываем наше исключение
+        raise ValueError("Некорректный формат даты!")
