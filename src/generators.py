@@ -8,7 +8,7 @@ def filter_by_currency(transactions: List[Dict], currency_code: str) -> Iterator
     :param currency_code: Валюта, по которой производится выборка.
     :return: Итератор, содержащий подходящие транзакции.
     """
-    return (tx for tx transactions if tx["operationAmount"]["currency"]["code"] == currency_code)
+    return (tx for tx in transactions if tx["operationAmount"]["currency"]["code"] == currency_code)
 
 
 def transaction_descriptions(transactions: List[Dict]) -> Iterator[str]:
