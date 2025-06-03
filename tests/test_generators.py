@@ -1,8 +1,17 @@
+from typing import Any
+from typing import Dict
+from typing import Iterator
+from typing import List
+
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+
+from src.generators import card_number_generator
+from src.generators import filter_by_currency
+from src.generators import transaction_descriptions
+
 
 @pytest.fixture
-def sample_transactions():
+def sample_transactions() -> List[Dict[str, Any]]:
     """Фикстура для набора примеров транзакций."""
     return [
         {
@@ -52,24 +61,27 @@ def sample_transactions():
         },
     ]
 
+
 @pytest.mark.parametrize("currency, expected_count", [("USD", 3), ("RUB", 2)])
-def test_filter_by_currency(sample_transactions, currency, expected_count):
+def test_filter_by_currency(sample_transactions: List[Dict[str, Any]], currency: str, expected_count: int) -> None:
     result = list(filter_by_currency(sample_transactions, currency))
     assert len(result) == expected_count
     for tx in result:
-        assert tx['operationAmount']['currency']['code'] == currency
+        assert tx["operationAmount"]["currency"]["code"] == currency
 
-@pytest.mark.parametrize("expected_descriptions", [
-    ["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет"]
-])
-def test_transaction_descriptions(sample_transactions, expected_descriptions):
-    result = list(transaction_descriptions(sample_transactions[:len(expected_descriptions)]))
+
+@pytest.mark.parametrize(
+    "expected_descriptions", [["Перевод организации", "Перевод со счета на счет", "Перевод со счета на счет"]]
+)
+def test_transaction_descriptions(sample_transactions: List[Dict[str, Any]], expected_descriptions: List[str]) -> None:
+    result = list(transaction_descriptions(sample_transactions[: len(expected_descriptions)]))
     assert result == expected_descriptions
 
-@pytest.mark.parametrize("start, stop, expected_numbers", [(1, 5, ['0000 0000 0000 0001', '0000 0000 0000 0002'])])
-def test_card_number_generator(start, stop, expected_numbers):
-    generator = card_number_generator(start, stop)
-    results = []
+
+@pytest.mark.parametrize("start, stop, expected_numbers", [(1, 5, ["0000 0000 0000 0001", "0000 0000 0000 0002"])])
+def test_card_number_generator(start: int, stop: int, expected_numbers: List[str]) -> None:
+    iterator: Iterator[str] = card_number_generator(start, stop)
+    results: List[str] = []
     for _ in range(len(expected_numbers)):
-        results.append(next(generator))
+        results.append(next(iterator))
     assert results == expected_numbers

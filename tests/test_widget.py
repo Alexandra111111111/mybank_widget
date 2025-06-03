@@ -1,3 +1,5 @@
+from typing import Type
+
 import pytest
 
 from src.widget import get_date
@@ -20,7 +22,7 @@ from src.widget import mask_account_card
         ("Счет 73654108430135874305", "Счет **4305"),
     ],
 )
-def test_mask_account_card(value, expected):
+def test_mask_account_card(value: str, expected: str) -> None:
     assert mask_account_card(value) == expected
 
 
@@ -39,7 +41,7 @@ def test_mask_account_card(value, expected):
         ("2026-08-15T15:30:45.678901", "15.08.2026"),
     ],
 )
-def test_get_date(value, expected):
+def test_get_date(value: str, expected: str) -> None:
     assert get_date(value) == expected
 
 
@@ -52,6 +54,6 @@ def test_get_date(value, expected):
         ("", ValueError),  # Пустая строка
     ],
 )
-def test_get_date_error_handling(value, expected_exception):
+def test_get_date_error_handling(value: str, expected_exception: Type[ValueError]) -> None:
     with pytest.raises(expected_exception):
         get_date(value)

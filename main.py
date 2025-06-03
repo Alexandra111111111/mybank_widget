@@ -1,9 +1,11 @@
+from src.generators import card_number_generator
+from src.generators import filter_by_currency
+from src.generators import transaction_descriptions
 from src.processing import filter_by_state
 from src.processing import sort_by_date
 from src.processing import transformat_int_str
 from src.widget import get_date
 from src.widget import mask_account_card
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 a = "Visa Platinum 7000792289606361"
 b = "Maestro 7000792289606361"

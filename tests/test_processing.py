@@ -1,3 +1,7 @@
+from typing import Any
+from typing import Dict
+from typing import List
+
 import pytest
 
 from src.processing import filter_by_state
@@ -26,7 +30,7 @@ from src.processing import transformat_int_str
         ),
     ],
 )
-def test_transformat_int_str(value, expected):
+def test_transformat_int_str(value: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> None:
     result = transformat_int_str(value)
     assert result == expected
 
@@ -55,7 +59,7 @@ def test_transformat_int_str(value, expected):
                 {"id": "615064591", "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
             ],
             "EXECUTED",
-            [],  # Ничего не возвращается, так как нет EXECUTED
+            [],
         ),
         # Случай 3: Смешанные данные
         (
@@ -73,7 +77,7 @@ def test_transformat_int_str(value, expected):
         ),
     ],
 )
-def test_filter_by_state(data_list, state, expected):
+def test_filter_by_state(data_list: List[Dict[str, Any]], state: str, expected: List[Dict[str, Any]]) -> None:
     result = filter_by_state(data_list, state)
     assert result == expected
 
@@ -98,7 +102,7 @@ def test_filter_by_state(data_list, state, expected):
         )
     ],
 )
-def test_sort_by_date_descending(data_list, expected):
+def test_sort_by_date_descending(data_list: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> None:
     result = sort_by_date(data_list)
     assert result == expected
 
@@ -123,8 +127,8 @@ def test_sort_by_date_descending(data_list, expected):
         )
     ],
 )
-def test_sort_by_date_ascending(data_list, expected):
-    result = sorted(data_list, key=lambda x: x["date"], reverse=False)
+def test_sort_by_date_ascending(data_list: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> None:
+    result = sorted(data_list, key=lambda x: x["date"])
     assert result == expected
 
 
@@ -148,7 +152,7 @@ def test_sort_by_date_ascending(data_list, expected):
         )
     ],
 )
-def test_sort_by_same_dates(data_list, expected):
+def test_sort_by_same_dates(data_list: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> None:
     result = sort_by_date(data_list)
     assert result == expected
 
@@ -163,6 +167,6 @@ def test_sort_by_same_dates(data_list, expected):
         ]
     ],
 )
-def test_incorrect_date_format(data_list):
+def test_incorrect_date_format(data_list: List[Dict[str, Any]]) -> None:
     with pytest.raises(Exception):
         sort_by_date(data_list)
