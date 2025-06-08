@@ -1,10 +1,10 @@
 from datetime import datetime
+from typing import Any
 from typing import Dict
 from typing import List
-from typing import Union
 
 
-def transformat_int_str(data_dict_1: List[Dict[str, Union[int, str]]]) -> List[Dict[str, str]]:
+def transformat_int_str(data_dict_1: list[dict[str, object]]) -> Any:
     """
     Преобразует по id int в str
     """
