@@ -1,3 +1,4 @@
+from src.decorators import log
 from src.generators import card_number_generator
 from src.generators import filter_by_currency
 from src.generators import transaction_descriptions
@@ -128,18 +129,19 @@ for card_number in card_number_generator(1, 5):
     print(card_number)
 
 
-from src.decorators import log
-
 @log()
 def add(a: int, b: int) -> int:
     """Возвращает сумму двух чисел."""
     return a + b
 
+
 add(2, 3)
 
-@log(filename='my_log.txt')
+
+@log(filename="my_log.txt")
 def divide(a: float, b: float) -> float:
     """Делит одно число на другое."""
     return a / b
+
 
 divide(10, 2)
