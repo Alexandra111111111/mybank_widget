@@ -126,3 +126,20 @@ for _ in range(len(transactions)):
 # Печатаем первые пять номеров карт
 for card_number in card_number_generator(1, 5):
     print(card_number)
+
+
+from src.decorators import log
+
+@log()
+def add(a: int, b: int) -> int:
+    """Возвращает сумму двух чисел."""
+    return a + b
+
+add(2, 3)
+
+@log(filename='my_log.txt')
+def divide(a: float, b: float) -> float:
+    """Делит одно число на другое."""
+    return a / b
+
+divide(10, 2)
