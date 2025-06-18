@@ -2,9 +2,16 @@ import os
 import sys
 from io import StringIO
 from unittest.mock import patch
-from decorators import log
+from src.decorators import log
+import logging
+import pytest
 
-sys.path.append(os.getcwd())
+
+@pytest.fixture
+def caplog(caplog):
+    caplog.set_level(logging.DEBUG)
+    return caplog
+
 
 class TestLogDecorator:
     def setup_method(self):
@@ -16,16 +23,16 @@ class TestLogDecorator:
         if os.path.exists(self.log_file_name):
             os.remove(self.log_file_name)
 
-    def test_successful_execution_console_output(self, capsys):
+    def test_successful_execution_console_output(self, caplog):
         @log()
         def example_function():
             return "Success!"
 
         example_function()
-        captured = capsys.readouterr()
-        assert "example_function ok" in captured.out
+        for record in caplog.records:
+            assert "example_function ok" in record.message
 
-    def test_error_handling_console_output(self, capsys):
+    def test_error_handling_console_output(self, caplog):
         @log()
         def failing_function():
             raise ValueError("Test Error!")
@@ -35,8 +42,8 @@ class TestLogDecorator:
         except ValueError:
             pass
         finally:
-            captured = capsys.readouterr()
-            assert "failing_function error:" in captured.err
+            for record in caplog.records:
+                assert "failing_function error:" in record.message
 
     def test_successful_execution_to_file(self):
         @log(filename=self.log_file_name)
