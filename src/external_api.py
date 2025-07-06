@@ -13,7 +13,7 @@ def convert_to_rubles(transaction: Dict) -> Optional[float]:
     amount = transaction.get('amount')
     currency = transaction.get('currency')
 
-    if amount is None or currency is None:
+    if amount is None and currency is None:
         return None
 
     if currency == 'RUB':
